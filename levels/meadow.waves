@@ -1,0 +1,25 @@
+# Meadow -- six waves
+# <enemy type> <count> <seconds between spawns>
+
+wave
+grunt 10 0.8
+
+wave
+grunt 16 0.55
+
+wave
+grunt 10 0.6
+brute 3 2.0
+
+wave
+splitter 8 1.0
+grunt 12 0.45
+
+wave
+brute 6 1.5
+splitter 8 0.8
+
+wave
+grunt 30 0.3
+brute 12 0.9
+splitter 10 0.6

@@ -1,0 +1,50 @@
+# ── Build output ──────────────────────────────────────────────────────────────
+build/
+out/
+cmake-build-*/
+
+# ── CMake generated files ────────────────────────────────────────────────────
+CMakeUserPresets.json
+compile_commands.json
+
+# ── Compiled objects and binaries ─────────────────────────────────────────────
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.so
+*.dylib
+*.dll
+
+# ── VS Code ──────────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/launch.json
+
+# ── C++ tooling caches ───────────────────────────────────────────────────────
+.cache/
+.clangd/
+*.pch
+*.gch
+
+# ── Visual Studio (if students use it instead of VS Code) ────────────────────
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+
+# ── OS files ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ── Misc ─────────────────────────────────────────────────────────────────────
+*.env
+*.log
+*~
+
+# -- Smoke test output --------------------------------------------------------
+selftest_*.png
+build.log
+tests.log
+selftest.log

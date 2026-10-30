@@ -1,0 +1,53 @@
+{
+  "name": "CS 1410 Game Dev (desktop in your browser)",
+  "build": { "dockerfile": "Dockerfile" },
+
+  // A lightweight Linux desktop you open in a browser tab at http://localhost:6080
+  // Game windows appear there. Same on Windows, macOS, and Linux.
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "noPassword",
+      "webPort": "6080",
+      "vncPort": "5901"
+    }
+  },
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": { "label": "Game desktop", "onAutoForward": "notify" },
+    "5901": { "label": "VNC (not needed)", "onAutoForward": "silent" }
+  },
+
+  "containerEnv": {
+    "CC": "gcc-13",
+    "CXX": "g++-13",
+    // Every program started in the container draws on the browser desktop.
+    "DISPLAY": ":1",
+    "VNC_RESOLUTION": "1280x800x24"
+  },
+  "runArgs": ["--shm-size=1g"],
+
+  // Build output lives in a Docker volume, not on your host filesystem.
+  //   - on Windows/macOS the workspace is a bind mount (9p/virtiofs); CMake's
+  //     FetchContent does a rename() across it that fails with "Permission denied"
+  //   - it is also much faster: compilers do a lot of small writes
+  "mounts": [
+    "source=holdfast-build-${devcontainerId},target=${containerWorkspaceFolder}/build,type=volume"
+  ],
+  // The volume is created root-owned; hand it to the user who does the building.
+  "postCreateCommand": "sudo chown -R vscode:vscode ${containerWorkspaceFolder}/build",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake"
+      ],
+      "settings": {
+        "cmake.configureOnOpen": true,
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+        "files.eol": "\n"
+      }
+    }
+  }
+}
